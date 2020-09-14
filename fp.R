@@ -113,7 +113,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   fp_count<-data.frame(fp_count)
   print(head(fp_count))
   
-  for(i in 2:4){fp_count[,i]<-as.numeric(fp_count[,i])}
+  for(i in 2:4){fp_count[,i]<-as.numeric(paste(fp_count[,i]))}
   print(head(fp_count))
   
   fp_vector<-rep(NA, nrow(fp_count))
