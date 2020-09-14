@@ -12,6 +12,7 @@ sampID<-args[4]
 
 
 
+
 get_fp<-function(bam, ref, ref_fai, sampID){
   
   #load("FP_docker/fingerprint_snps.RData")
@@ -132,12 +133,11 @@ get_fp<-function(bam, ref, ref_fai, sampID){
 
 fp<-get_fp(bam,ref,ref_fai)
 
-f<-paste0("/data/", sampID, "_fingerprint.RData")
 
-save(fp, file=f)
+
+save(fp, file=args[5])
 
 fp_vector<-fp[[2]]
 
-g<-paste0("/data/", sampID, "_fingerprint.txt")
-write.table(fp_vector, file=g, quote=FALSE, row.names=FALSE)
+write.table(fp_vector, file=args[6], quote=FALSE, row.names=FALSE)
 
