@@ -20,8 +20,8 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   print(bam)
   
   #run mpileup
-  #comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
-  system(comm)
+  comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
+  #system(comm)
   
   #read and parse mpileup output
   fp<-read.csv(file="/data/fingerprint.txt", sep="\t", stringsAsFactors = FALSE, header=FALSE, quote = "", fill=FALSE)
