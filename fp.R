@@ -20,7 +20,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   print(bam)
   
   #run mpileup
-  comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
+  #comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
   system(comm)
   
   #read and parse mpileup output
@@ -30,6 +30,8 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   
   colnames(fp)<-c("Chr", "Pos", "Ref", "Depth", "mpileup", "Qual")
   fp$CUR_POS<-paste(fp$Chr, fp$Pos, sep="-")
+  
+  print(head(fp))
   
   fingerprint_snps$CHROM_POS_REF_ALT<-paste(fingerprint_snps$Chr, fingerprint_snps$Start, fingerprint_snps$Ref, fingerprint_snps$Alt, sep="-")
   
