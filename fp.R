@@ -17,7 +17,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   #load("FP_docker/fingerprint_snps.RData")
   load("fingerprint_snps.RData")
   
-  print(bam)
+
   
   #run mpileup
   comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
@@ -26,16 +26,16 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   #read and parse mpileup output
   fp<-read.csv(file="/data/fingerprint.txt", sep="\t", stringsAsFactors = FALSE, header=FALSE, quote = "", fill=FALSE)
   
-  print(head(fp))
+
   
   colnames(fp)<-c("Chr", "Pos", "Ref", "Depth", "mpileup", "Qual")
   fp$CUR_POS<-paste(fp$Chr, fp$Pos, sep="-")
   
-  print(head(fp))
+ 
   
   fingerprint_snps$CHROM_POS_REF_ALT<-paste(fingerprint_snps$Chr, fingerprint_snps$Start, fingerprint_snps$Ref, fingerprint_snps$Alt, sep="-")
   
-  print(head(fingerprint_snps))
+
   
   fp$ref_FS<-str_count(fp$mpileup, pattern="[.]")
   fp$ref_RS<-str_count(fp$mpileup, pattern=",")
@@ -107,7 +107,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
     
     
     fp_count<-rbind(fp_count, cbind(CHROM_POS_REF_ALT, depth_total, depth_alt, AF, evidence))
-    head(fp_count)
+    print(head(fp_count))
   }
   
   fp_count<-data.frame(fp_count)
