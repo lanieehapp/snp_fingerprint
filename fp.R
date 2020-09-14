@@ -21,7 +21,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   
   #run mpileup
   comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
-  #system(comm)
+  system(comm)
   
   #read and parse mpileup output
   fp<-read.csv(file="/data/fingerprint.txt", sep="\t", stringsAsFactors = FALSE, header=FALSE, quote = "", fill=FALSE)
@@ -57,8 +57,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   fp$INS_evidence<-fp$INS>0
   fp$DEL_evidence<-fp$DEL>0
   
-  print("fp after counting")
-  print(head(fp))
+
   
   nt<-c("A", "C", "T", "G")
   fp_count<-NULL
@@ -109,12 +108,12 @@ get_fp<-function(bam, ref, ref_fai, sampID){
     fp_count<-rbind(fp_count, cbind(CHROM_POS_REF_ALT, depth_total, depth_alt, AF, evidence))
   }
   
-  print(head(fp_count))
+
   fp_count<-data.frame(fp_count)
-  print(head(fp_count))
+
   
   for(i in 2:4){fp_count[,i]<-as.numeric(paste(fp_count[,i]))}
-  print(head(fp_count))
+
   
   fp_vector<-rep(NA, nrow(fp_count))
   fp_vector[fp_count$AF==0]<-"0"
