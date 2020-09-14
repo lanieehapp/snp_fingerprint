@@ -14,8 +14,8 @@ sampID<-args[4]
 
 get_fp<-function(bam, ref, ref_fai, sampID){
   
-  load("FP_docker/fingerprint_snps.RData")
-  #load("fingerprint_snps.RData")
+  #load("FP_docker/fingerprint_snps.RData")
+  load("fingerprint_snps.RData")
   
   #run mpileup
   comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> fingerprint.txt' )
