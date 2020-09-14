@@ -35,6 +35,8 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   
   fingerprint_snps$CHROM_POS_REF_ALT<-paste(fingerprint_snps$Chr, fingerprint_snps$Start, fingerprint_snps$Ref, fingerprint_snps$Alt, sep="-")
   
+  print(head(fingerprint_snps))
+  
   fp$ref_FS<-str_count(fp$mpileup, pattern="[.]")
   fp$ref_RS<-str_count(fp$mpileup, pattern=",")
   fp$A_FS<-str_count(fp$mpileup, pattern="A")
@@ -54,6 +56,9 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   fp$G_evidence<-fp$G_FS>0 & fp$G_RS>0
   fp$INS_evidence<-fp$INS>0
   fp$DEL_evidence<-fp$DEL>0
+  
+  print("fp after counting")
+  print(head(fp))
   
   nt<-c("A", "C", "T", "G")
   fp_count<-NULL
@@ -102,7 +107,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
     
     
     fp_count<-rbind(fp_count, cbind(CHROM_POS_REF_ALT, depth_total, depth_alt, AF, evidence))
-    
+    head(fp_count)
   }
   
   fp_count<-data.frame(fp_count)
