@@ -17,12 +17,16 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   #load("FP_docker/fingerprint_snps.RData")
   load("fingerprint_snps.RData")
   
+  print(bam)
+  
   #run mpileup
-  comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> fingerprint.txt' )
+  comm<-paste0('samtools mpileup -a -l fingerprinting.bed --fasta-ref ',ref, ' ', bam,  '> /data/fingerprint.txt' )
   system(comm)
   
   #read and parse mpileup output
-  fp<-read.csv(file="fingerprint.txt", sep="\t", stringsAsFactors = FALSE, header=FALSE, quote = "", fill=FALSE)
+  fp<-read.csv(file="/data/fingerprint.txt", sep="\t", stringsAsFactors = FALSE, header=FALSE, quote = "", fill=FALSE)
+  
+  print(head(fp))
   
   colnames(fp)<-c("Chr", "Pos", "Ref", "Depth", "mpileup", "Qual")
   fp$CUR_POS<-paste(fp$Chr, fp$Pos, sep="-")
