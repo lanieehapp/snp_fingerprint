@@ -107,10 +107,12 @@ get_fp<-function(bam, ref, ref_fai, sampID){
     
     
     fp_count<-rbind(fp_count, cbind(CHROM_POS_REF_ALT, depth_total, depth_alt, AF, evidence))
-    print(head(fp_count))
   }
   
+  print(head(fp_count))
   fp_count<-data.frame(fp_count)
+  print(head(fp_count))
+  
   for(i in 2:4){fp_count[,i]<-as.numeric(fp_count[,i])}
   
   
