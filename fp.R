@@ -137,7 +137,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
 
 
 
-fp<-get_fp(bam,ref,ref_fai)
+fp<-get_fp(bam,ref,ref_fai, sampID)
 
 save(fp, file=args[5])
 
