@@ -113,7 +113,7 @@ get_fp<-function(bam, ref, ref_fai, sampID){
 
   fp_count<-data.frame(fp_count)
   
-  colnames(fp_count)<-paste0(sampID, "_", colnames(fp_count))
+  
 
   
   for(i in 2:4){fp_count[,i]<-as.numeric(paste(fp_count[,i]))}
@@ -126,10 +126,12 @@ get_fp<-function(bam, ref, ref_fai, sampID){
   fp_vector[fp_count$depth_total<2]<-"N"
   fp_vector[is.na(fp_vector)]<-"U"
   
+  
+  
   fp_vector<-data.frame(fp_vector)
   
   colnames(fp_vector)<-sampID
-  
+  colnames(fp_count)<-paste0(sampID, "_", colnames(fp_count))
   
   return(list(fp_count,fp_vector))
   
