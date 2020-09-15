@@ -120,9 +120,9 @@ get_fp<-function(bam, ref, ref_fai, sampID){
 
   
   fp_vector<-rep(NA, nrow(fp_count))
-  fp_vector[fp_count$AF==0]<-"0"
-  fp_vector[fp_count$AF>0.9]<-"2"
-  fp_vector[fp_count$AF>0.4 & fp_count$AF<0.6]<-"1"
+  fp_vector[fp_count$AF<0.15]<-"0"
+  fp_vector[fp_count$AF>0.85]<-"2"
+  fp_vector[fp_count$AF>0.25 & fp_count$AF<0.75]<-"1"
   fp_vector[fp_count$depth_total<2]<-"N"
   fp_vector[is.na(fp_vector)]<-"U"
   
