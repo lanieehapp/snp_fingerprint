@@ -144,5 +144,8 @@ fp<-get_fp(bam,ref,ref_fai, sampID)
 save(fp, file=args[5])
 
 fp_vector<-fp[[2]]
+fp_count<-fp[[1]]
 
 write.table(fp_vector, file=args[6], quote=FALSE, row.names=FALSE)
+
+write.table(fp_count, file=args[7], quote=FALSE, row.names=FALSE)
