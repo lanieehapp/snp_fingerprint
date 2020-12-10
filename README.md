@@ -9,5 +9,5 @@ This tool generates a SNP fingerprint for a BAM.
 
 ## Usage:
 
-Rscript fp.R <BAM file> <Reference FASTA> <Reference FASTA index> <Sample ID> <Rdata output> <Vector output> <Count output>
+`Rscript fp.R <BAM file> <Reference FASTA> <Reference FASTA index> <Sample ID> <Rdata output> <Vector output> <Count output>`
 
