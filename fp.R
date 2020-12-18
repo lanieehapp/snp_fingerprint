@@ -31,7 +31,7 @@ process_fp_variant_evidence <- function(fp) {
 }
 
 get_fp <- function(bam, ref, ref_fai, sampID, temp_dir = "/data",
-                   no_coverage_depth = 2, low_coverage_depth = 30) {
+                   no_coverage_depth = 10, low_coverage_depth = 30) {
   # Arguments:
   # bam: file path to a sample BAM file
   # ref: file path to a reference genome FASTA file
@@ -115,12 +115,17 @@ get_fp <- function(bam, ref, ref_fai, sampID, temp_dir = "/data",
   
   for(i in 2:4){fp_count[,i] <- as.numeric(paste(fp_count[,i]))}
 
-  
+  # Rules for fingerprint vector:
+  # 0: wild type; set if alternate allele frequency is <0.15
+  # 1: heterozygous mutant; set if alternate AF is from 0.25-0.75
+  # 2: homozygous mutant; set if alternate AF is >0.85
+  # U: undetermined; alternate AF is from 0.15-0.25 or 0.75-0.85
+  # N: not enough coverage to make a call; set if depth < no_coverage_depth
   fp_vector <- rep(NA, nrow(fp_count))
   fp_vector[fp_count$AF<0.15] <- "0"
   fp_vector[fp_count$AF>0.85] <- "2"
   fp_vector[fp_count$AF>0.25 & fp_count$AF<0.75] <- "1"
-  fp_vector[fp_count$depth_total<2] <- "N"
+  fp_vector[fp_count$depth_total < no_coverage_depth] <- "N"
   fp_vector[is.na(fp_vector)] <- "U"
   
   
