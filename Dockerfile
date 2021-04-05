@@ -4,9 +4,6 @@ FROM r-base:3.5.2
 # Maintainer
 MAINTAINER DaveLab <lab.dave@gmail.com>
 
-# Label
-LABEL base.image="snp_fingerprint:v.20210404"
-
 # update the OS related packages
 RUN apt-get update -y && apt-get install -y \
     build-essential \
