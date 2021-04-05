@@ -10,6 +10,7 @@ LABEL base.image="snp_fingerprint:v.20210404"
 # update the OS related packages
 RUN apt-get update -y && apt-get install -y \
     build-essential \
+    libc6-dev \
     libnss-sss \
     curl \
     vim \
@@ -32,8 +33,8 @@ RUN apt-get update -y && apt-get install -y \
     bsdmainutils \
     bedtools \
     gcc-8-base \
-    libmpx2 \		
-    libgcc-8-dev \
+    libmpx2 \
+    samtools \
     bedops \
     tabix \
     libcurl4-gnutls-dev \
